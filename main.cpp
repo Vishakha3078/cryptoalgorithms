@@ -16,18 +16,18 @@ int main(){
     ZZ alicekey;
     cout << "Enter secret key of alice: "<<endl;
     cin >> alicekey;
-    ZZ_p A = diff_hellencryption(p,alicekey,g);
+    ZZ_p A = a.diff_hellencryption(p,alicekey,g);
     //bob
     ZZ bobkey;
     cout << "Enter secret key of bob: "<<endl;
     cin >> bobkey;
-    ZZ_p B = diff_hellencryption(p,bobkey,g);
+    ZZ_p B = a.diff_hellencryption(p,bobkey,g);
   //diffhelldecryption
     //alice
-    ZZ_p AA = diff_helldecryption(p,alicekey,B);
+    ZZ_p AA = a.diff_helldecryption(p,alicekey,B);
     cout << "Key recieved by alice: "<< AA << endl;
     //bob
-    ZZ_p BB = diff_helldecryption(p,bobkey,A);
+    ZZ_p BB = a.diff_helldecryption(p,bobkey,A);
     cout << "Key recieved by bob: "<< BB << endl;
 
 
