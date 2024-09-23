@@ -1,6 +1,4 @@
 #include"crypto.h"
-ZZ_p cryptoAlgo::diff_hellencryption(ZZ p,ZZ skey,ZZ_p g){
-  p = conv<ZZ>(p);
-  ZZ_p :: init(p);
+ZZ_p cryptoAlgo::diff_hellencryption(ZZ skey,ZZ_p g){
   return power(g,skey);
 }

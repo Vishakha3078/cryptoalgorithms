@@ -15,11 +15,11 @@ ZZ_p cryptoAlgo::el_gamal(ZZ p,ZZ_p g,ZZ_p m,ZZ skeyx,ZZ randomy){
     // encryption
     C1 = power(g,randomy);
     C2 = power(h,randomy);
-    C2 = C2 * m;  
-    //decryption
+    C2 = C2 * m; 
+
+  //decryption
     C1 = inv(power(C1,skeyx));
     message = C1 * C2;
     return message;
-
-}
+ }
 

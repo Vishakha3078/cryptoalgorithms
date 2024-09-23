@@ -1,7 +1,7 @@
 all: finish
 
-finish:main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o el_gamal.o dig_sign.o 
-	g++ main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o el_gamal.o dig_sign.o -lntl -lgmp -pthread -o finish
+finish:main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o
+	g++ main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o -lntl -lgmp -pthread -o finish
 
 main.o: main.cpp
 	g++ -c main.cpp -o main.o
@@ -15,11 +15,17 @@ diff_hellencryption.o: diff_hellencryption.cpp
 diff_helldecryption.o: diff_helldecryption.cpp
 	g++ -c diff_helldecryption.cpp -o diff_helldecryption.o
 
-el_gamal.o: el_gamal.cpp
-	g++ -c el_gamal.cpp -o el_gamal.o
+elgamal_encryption.o: elgamal_encryption.cpp
+	g++ -c elgamal_encryption.cpp -o elgamal_encryption.o
+
+elgamal_decryption.o: elgamal_decryption.cpp
+	g++ -c elgamal_decryption.cpp -o elgamal_decryption.o
   
 dig_sign.o: dig_sign.cpp
 	g++ -c dig_sign.cpp -o dig_sign.o
+
+dig_signverification.o: dig_signverification.cpp
+	g++ -c dig_signverification.cpp -o dig_signverification.o
 
 header: crypto.h
 	g++ crypto.h
