@@ -76,7 +76,7 @@ int main(){
   cout << "Decrypted message : "<< endl;
   for (i = 0; i < message.length();i++){
     output = a.elgamal_decryption(received[i].text1,received[i].text2,x);
-    printf("%ld",output);
+    printf("%c",(char)output);
   } 
    //*/
 
