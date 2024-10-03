@@ -21,7 +21,7 @@ int main(){
   cout << a.brutef_dlp(p,g,h)<<endl; 
  */ 
 
-//diff_hell----------------------------------------------------------------------------------------
+//diff_hell---------------------------------------------------------------------------------------
   /*
   cout << "Enter prime : " <<endl;
 	cin >> p;
@@ -50,7 +50,7 @@ int main(){
   */
   
 //el_gamal----------------------------------------------------------------------------------------
-  ///*
+  /*
   cout << "Enter prime : " <<endl;
 	cin >> p;
 	p = conv<ZZ>(p);
@@ -63,48 +63,45 @@ int main(){
   cin >> x;
   cout << "Enter message :" << endl;
   cin >> message;
-  encrypt received[message.length()];
-  int i;
-  long output;
-  ZZ_p c;
-  for(i = 0; i < message.length(); i++){
+  encrypt received;
+  ZZ_p msg;
+  cout <<"Decrypted message"<<endl;
+  for(int i = 0; i < message.length(); i++){
     ZZ y = ZZ(RandomBnd(p));
-    conv(c,int(message[i]));
-    received[i] = a.elgamal_encryption(g,c,x,y);
+    conv(msg,int(message[i]));
+    received = a.elgamal_encryption(g,msg,x,y);
+    printf("%c",(char)a.elgamal_decryption(received.text1,received.text2,x));
   }
+  */
 
-  cout << "Decrypted message : "<< endl;
-  for (i = 0; i < message.length();i++){
-    output = a.elgamal_decryption(received[i].text1,received[i].text2,x);
-    printf("%c",(char)output);
-  } 
-   //*/
-
-  //digital signature------------------------------------------------------------------------------
-    //signature creation
-  /*
+//digital signature------------------------------------------------------------------------------
+  ///*
+  //signature creation
   cout << "Enter prime : " <<endl;
 	cin >> p;
 	p = conv<ZZ>(p);
 	ZZ_p::init(p);
   cout << "Enter generator : " <<endl;
   cin >> g;
-	ZZ_p x,y,m;
+	ZZ_p x,msg;
+  string message ;
 	cout << "enter secret key(x): "<<endl;
 	cin>>x;
 	cout<< "enter message: "<<endl;
-	cin>>m;
-	cout <<"enter some number from group(y): "<<endl;
-	cin>>y;
-	signature sig =  a.dig_sign(p,g,x,y,m);
-	cout <<"gamma: "<<sig.gamma<<" delta: "<<sig.delta<< endl;
-    //signature verification
-  ZZ_p ::init(p);
-  cout << "//verification//"<<endl;
-  if(a.dig_signverification(g,x,m,sig.gamma,sig.delta) == 1) 
-	  cout<<"digital signature verified"<<endl;
-  else
-    cout<<"signature not verified"<<endl;
-	*/
+	cin>>message;
+  signature sig;
+  for(int i = 0; i < message.length(); i++){
+    conv(msg,int(message[i]));
+	  sig =  a.dig_sign(p,g,x,msg);
+	  cout <<"gamma: "<<sig.gamma<<" delta: "<<sig.delta<< endl;
+  //signature verification
+    ZZ_p ::init(p);
+    cout << "//verification//"<<endl;
+    if(a.dig_signverification(g,x,msg,sig.gamma,sig.delta) == 1) 
+	    cout<<"digital signature verified"<<endl;
+    else
+      cout<<"signature not verified"<<endl;
+  }
+	//*/
   return 0;
 }           
