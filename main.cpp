@@ -5,6 +5,7 @@ int main(){
 //point addition---------------------------------------------------------------------------------
 ///*
     p = 11;
+    ZZ_p::init(p);
     ZZ_p a;
     a = 1;
     ZZ_p b;
@@ -14,7 +15,10 @@ int main(){
     int n,i;
     n = 2;
     pt = c->ell_curve_point(n);
-    for(i = 0; i < n;   i++){
+    cout<<"done here\n";
+    for(i = 0; i < n; i++){
+        if(!pt[i]){cout<<"its NULL\n";continue;}
+        cout<<"--------- \n";
         cout << pt[i]->x <<endl;
         cout << pt[i]->y <<endl;
     }

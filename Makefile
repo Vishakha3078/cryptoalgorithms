@@ -1,4 +1,4 @@
-all: finish
+all: run
 
 finish:main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o build_h.o elliptic_curve.o
 	g++ main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o build_h.o elliptic_curve.o -lntl -lgmp -pthread -o finish
@@ -39,5 +39,5 @@ header: crypto.h
 clear: 
 	rm *.o finish
 
-run: 
-	./finish
+run: finish
+	clear && ./finish
