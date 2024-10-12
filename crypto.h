@@ -51,9 +51,11 @@ class elliptic_curve{
     ZZ_p b;
   public:
     elliptic_curve(ZZ prime,ZZ_p a,ZZ_p b){
+        this -> prime = prime;
+        ZZ_p::init(prime);
         this -> a = a;
         this -> b = b;
-        this -> prime = prime;
+        cout<<"Done\n";
     }
     bool check_exist(ZZ_p x); 
     point **ell_curve_point(int x);
