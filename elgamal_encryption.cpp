@@ -1,10 +1,8 @@
 #include"crypto.h"
-encrypt cryptoAlgo::elgamal_encryption(ZZ_p g,ZZ_p m,ZZ skeyx,ZZ randomy){
-  ZZ_p h;
+encrypt cryptoAlgo::elgamal_encryption(ZZ_p m,ZZ randomy){
   encrypt msg;
-  h = power(g,skeyx);
-  msg.text1 = power(g,randomy);
-  msg.text2 = power(h,randomy);
+  msg.text1 = power(this -> generator,randomy);
+  msg.text2 = power(this -> h,randomy);
   msg.text2 = msg.text2 * m;
   return msg;
 }

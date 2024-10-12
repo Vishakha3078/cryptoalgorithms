@@ -1,7 +1,7 @@
 all: finish
 
-finish:main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o
-	g++ main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o -lntl -lgmp -pthread -o finish
+finish:main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o build_h.o elliptic_curve.o
+	g++ main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o build_h.o elliptic_curve.o -lntl -lgmp -pthread -o finish
 
 main.o: main.cpp
 	g++ -c main.cpp -o main.o
@@ -26,6 +26,12 @@ dig_sign.o: dig_sign.cpp
 
 dig_signverification.o: dig_signverification.cpp
 	g++ -c dig_signverification.cpp -o dig_signverification.o
+
+build_h.o: build_h.cpp
+	g++ -c build_h.cpp -o build_h.o
+
+elliptic_curve.o: elliptic_curve.cpp
+	g++ -c elliptic_curve.cpp -o elliptic_curve.o
 
 header: crypto.h
 	g++ crypto.h

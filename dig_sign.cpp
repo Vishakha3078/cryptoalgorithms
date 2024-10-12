@@ -1,21 +1,20 @@
 #include"crypto.h"
-signature cryptoAlgo::dig_sign(ZZ p,ZZ_p g,ZZ_p skey,ZZ_p m){
+signature cryptoAlgo::dig_sign(ZZ_p m){
   ZZ rand_number;
   ZZ_p randomy;
   
   do{
-      rand_number = ZZ(RandomBnd(p - 1));
-    }while(GCD(p-1,rand_number) != ZZ(1));
+      rand_number = ZZ(RandomBnd(this -> prime - 1));
+    }while(GCD(this ->prime-1,rand_number) != ZZ(1));
   conv(randomy,rand_number);
  
     signature output;
     ZZ_p gamma,delta;
-    power(gamma,g,rep(randomy));
-    p = p - 1;
-    ZZ_p :: init(p);
+    power(gamma,this ->generator,rep(randomy));
+    ZZ_p :: init(this ->prime - 1);
   
     randomy = inv(randomy);
-    delta = (m - (skey * gamma));
+    delta = (m - (to_ZZ_p(this -> privatekey) * gamma));
     delta = delta*randomy;
     output.gamma = gamma;
     output.delta = delta;
@@ -23,5 +22,4 @@ signature cryptoAlgo::dig_sign(ZZ p,ZZ_p g,ZZ_p skey,ZZ_p m){
   return output; 
 }
 
-    
 	
