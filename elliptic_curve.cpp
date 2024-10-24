@@ -115,9 +115,7 @@ two_pnt elliptic_curve::el_gamal_encrypt(point pt1,point m){
     cout <<"randy: " <<y <<endl;
     point pt2 = this -> build_Q(pt1);
     result.a = this -> scalar_multiplication(pt1,y);
-    cout<<"arr :"<<result.a.x<<"y:"<<result.a.y<<endl;
     result.b = this -> point_addition(m,this -> scalar_multiplication(pt2,y));
-    cout<<"arr :"<<result.b.x<<"y:"<<result.b.y<<endl;
     return result;
 }
 

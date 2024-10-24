@@ -58,10 +58,10 @@ class elliptic_curve{
     ZZ secretkey;
   public:
     elliptic_curve(ZZ prime,ZZ_p a,ZZ_p b){
-        this -> a = a;
-        this -> b = b;
         this -> prime = prime; 
         ZZ_p::init(this ->prime);
+        this -> a = a;
+        this -> b = b;
         this -> secretkey = RandomBnd(this->prime);
     } 
     point build_Q(point pt);
