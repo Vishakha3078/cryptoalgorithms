@@ -1,25 +1,42 @@
 #include"iostream"
 #include"crypto.h"
+
 int main(){
     ZZ p;
-//point addition---------------------------------------------------------------------------------
+//elliptic_curve_points---------------------------------------------------------------------------
 ///*
     p = 11;
-    ZZ_p a;
+    p =conv<ZZ>(p);
+    ZZ_p ::init(p);
+    ZZ_p a,b;
     a = 1;
-    ZZ_p b;
     b = 6;
     elliptic_curve *c = new elliptic_curve(p,a,b);
-    point **pt;
-    int n,i;
-    n = 2;
-    pt = c->ell_curve_point(n);
-    for(i = 0; i < n;   i++){
-        cout << pt[i]->x <<endl;
-        cout << pt[i]->y <<endl;
-    }
-  //   */ 
-      
+    point *pnt;
+    int number,m;
+    number = 12;
+    pnt = c->ell_curve_point(number);
+   // for(int i = 0; i < n; i++)
+   //     cout <<"x: "<< pnt[i].x <<" y: "<< pnt[i].y <<endl;
+    point pt1,pt2;
+    pt1.x = 2;
+    pt1.y = 7;
+//scalar multiplication------------------------------------------------------------------------
+    //point resultant = c-> scalar_multiplication(pt1,ZZ(9));
+  //  cout <<"x: "<< resultant.x <<" y: "<< resultant.y <<endl;
+//el gamal----------------------------------------------------------------------------------------
+    point msg;
+    msg.x = 3;
+    msg.y = 6;
+    point *arr = c -> el_gamal_encrypt(pt1,msg);
+    //encryption
+    cout <<"C1 -> x: "<< arr[0].x <<" C1-> y: "<< arr[0].y <<endl;
+    cout <<"C2 -> x: "<< arr[1].x <<" C2 -> y: "<< arr[1].y <<endl;
+    //decryption
+    
+    msg = c -> el_gamal_decrypt(arr[0],arr[1]);
+     cout <<"x: "<< msg.x <<" y: "<< msg.y <<endl;
+//*/
 //bruteforce_dlp----------------------------------------------------------------------------------
 /*
     cout << "Enter prime : " <<endl;

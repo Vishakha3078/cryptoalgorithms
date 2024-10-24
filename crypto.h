@@ -2,6 +2,7 @@
 #include<NTL/ZZ.h>
 #include<NTL/ZZ_p.h>
 #include<string>
+#include<cmath>
 using namespace std;
 using namespace NTL;
 
@@ -49,14 +50,26 @@ class elliptic_curve{
     ZZ prime;
     ZZ_p a;
     ZZ_p b;
+    ZZ secretkey;
   public:
     elliptic_curve(ZZ prime,ZZ_p a,ZZ_p b){
         this -> a = a;
         this -> b = b;
-        this -> prime = prime;
-    }
+        this -> prime = prime; 
+        ZZ_p::init(this ->prime);
+        this -> secretkey = RandomBnd(this->prime);
+    } 
+    point build_Q(point pt);
+    point *el_gamal_encrypt(point pt,point m);
+    point el_gamal_decrypt(point pt1,point pt2);
     bool check_exist(ZZ_p x); 
-    point **ell_curve_point(int x);
+    point *ell_curve_point(int x);
+    point point_addition(point a, point b);
+    int totalbits(ZZ n);
+    int* bit_array(ZZ n,int size);
+    point scalar_multiplication(point a,ZZ m);
+    ZZ_p square_and_multiply(point a);
+
 };
 
 
