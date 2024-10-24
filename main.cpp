@@ -22,8 +22,8 @@ int main(){
     pt1.x = 2;
     pt1.y = 7;
 //scalar multiplication------------------------------------------------------------------------
-    point resultant = c-> scalar_multiplication(pt1,ZZ(4));
-    cout <<"x: "<< resultant.x <<" y: "<< resultant.y <<endl;
+   // point resultant = c-> scalar_multiplication(pt1,ZZ(4));
+    //cout <<"x: "<< resultant.x <<" y: "<< resultant.y <<endl;
 //el gamal----------------------------------------------------------------------------------------
     point msg;
     msg.x = 3;

@@ -55,7 +55,7 @@ point elliptic_curve::point_addition(point pt1,point pt2){
     if (pt2.x == 0 && pt2.y == 1)
         return pt1;
     if (pt1.x != pt2.x || pt1.y != pt2.y){
-        if(pt1.x == pt2.x || pt1.y == pt2.y){
+        if(pt1.x == pt2.x){
             pt3.x = 0;
             pt3.y = 1;
             return pt3;
@@ -120,8 +120,8 @@ two_pnt elliptic_curve::el_gamal_encrypt(point pt1,point m){
 }
 
 point elliptic_curve::el_gamal_decrypt(point c1,point c2){
-  c1 = this -> scalar_multiplication(c1,this -> secretkey);
   c1.y = -c1.y;
+  c1 = this -> scalar_multiplication(c1,this -> secretkey);
   return this -> point_addition(c2,c1); 
 }
 
