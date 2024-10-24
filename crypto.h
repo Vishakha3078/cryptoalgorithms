@@ -45,6 +45,11 @@ typedef struct point{
   ZZ_p y;
 }point;
 
+typedef struct two_pnt{
+  point a;
+  point b;
+}two_pnt;
+
 class elliptic_curve{
   private:
     ZZ prime;
@@ -60,7 +65,7 @@ class elliptic_curve{
         this -> secretkey = RandomBnd(this->prime);
     } 
     point build_Q(point pt);
-    point *el_gamal_encrypt(point pt,point m);
+    two_pnt el_gamal_encrypt(point pt,point m);
     point el_gamal_decrypt(point pt1,point pt2);
     bool check_exist(ZZ_p x); 
     point *ell_curve_point(int x);

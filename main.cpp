@@ -22,19 +22,19 @@ int main(){
     pt1.x = 2;
     pt1.y = 7;
 //scalar multiplication------------------------------------------------------------------------
-    //point resultant = c-> scalar_multiplication(pt1,ZZ(9));
-  //  cout <<"x: "<< resultant.x <<" y: "<< resultant.y <<endl;
+    point resultant = c-> scalar_multiplication(pt1,ZZ(4));
+    cout <<"x: "<< resultant.x <<" y: "<< resultant.y <<endl;
 //el gamal----------------------------------------------------------------------------------------
     point msg;
     msg.x = 3;
     msg.y = 6;
-    point *arr = c -> el_gamal_encrypt(pt1,msg);
+    two_pnt res = c -> el_gamal_encrypt(pt1,msg);
     //encryption
-    cout <<"C1 -> x: "<< arr[0].x <<" C1-> y: "<< arr[0].y <<endl;
-    cout <<"C2 -> x: "<< arr[1].x <<" C2 -> y: "<< arr[1].y <<endl;
+    cout <<"C1 -> x: "<< res.a.x <<" C1-> y: "<< res.a.y <<endl;
+    cout <<"C2 -> x: "<< res.b.x <<" C2 -> y: "<< res.b.y <<endl;
     //decryption
     
-    msg = c -> el_gamal_decrypt(arr[0],arr[1]);
+    msg = c -> el_gamal_decrypt(res.a,res.b);
      cout <<"x: "<< msg.x <<" y: "<< msg.y <<endl;
 //*/
 //bruteforce_dlp----------------------------------------------------------------------------------

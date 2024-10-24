@@ -108,15 +108,17 @@ ZZ_p elliptic_curve::square_and_multiply(point pt){
 }
 
 
-point *elliptic_curve::el_gamal_encrypt(point pt1,point m){
-    point *array = (point*)malloc(sizeof(point)*2);
+two_pnt elliptic_curve::el_gamal_encrypt(point pt1,point m){
+    two_pnt result;
     ZZ y = RandomBnd(this -> prime -1);  
+    cout <<"randx: " <<this -> secretkey <<endl;
     cout <<"randy: " <<y <<endl;
     point pt2 = this -> build_Q(pt1);
-    array[0] = this -> scalar_multiplication(pt1,y);
-    cout<<"arr :"<<array[0].x<<"y:"<<array[0].y<<endl;
-    array[1] = this -> point_addition(m,this -> scalar_multiplication(pt2,y));
-    return array;
+    result.a = this -> scalar_multiplication(pt1,y);
+    cout<<"arr :"<<result.a.x<<"y:"<<result.a.y<<endl;
+    result.b = this -> point_addition(m,this -> scalar_multiplication(pt2,y));
+    cout<<"arr :"<<result.b.x<<"y:"<<result.b.y<<endl;
+    return result;
 }
 
 point elliptic_curve::el_gamal_decrypt(point c1,point c2){
