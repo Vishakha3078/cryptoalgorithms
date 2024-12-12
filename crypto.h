@@ -3,6 +3,8 @@
 #include<NTL/ZZ_p.h>
 #include<string>
 #include<cmath>
+#include<map>
+#include<tuple>
 using namespace std;
 using namespace NTL;
 
@@ -50,6 +52,13 @@ typedef struct two_pnt{
   point b;
 }two_pnt;
 
+
+typedef struct enc_txt{
+  point c1;
+  ZZ_p c2;
+}enc_txt;
+
+
 class elliptic_curve{
   private:
     ZZ prime;
@@ -65,20 +74,61 @@ class elliptic_curve{
         this -> secretkey = RandomBnd(this->prime);
     } 
     point build_Q(point pt);
-    two_pnt el_gamal_encrypt(point pt,point m);
-    point el_gamal_decrypt(point pt1,point pt2);
     bool check_exist(ZZ_p x); 
-    point *ell_curve_point(int x);
-    point point_addition(point a, point b);
     int totalbits(ZZ n);
     int* bit_array(ZZ n,int size);
+    point *ell_curve_point(int x);
+    point point_addition(point a, point b);
     point scalar_multiplication(point a,ZZ m);
     ZZ_p square_and_multiply(point a);
-
+    two_pnt el_gamal_encrypt(point pt,point m);
+    point el_gamal_decrypt(point pt1,point pt2);
+    enc_txt integrated_encrypt(point pt,ZZ m);
+    ZZ_p integrated_decrypt(enc_txt text);
+    signature digital_sign(point pt,ZZ order,ZZ_p m);
+    bool digital_sign_verification(signature sign,ZZ_p m,point pt);
 };
 
+class RSA{
+  private:
+      ZZ p;
+      ZZ q;
+      ZZ_p d;
+  public:
+      ZZ n;
+      ZZ_p e;
+      RSA(ZZ p,ZZ q){
+          this -> p = p;
+          this -> q = q;
+          this -> n = p * q;
+          this -> e = createe();
+          this -> d = inv(e);
+          ZZ_p::init(this -> n);
+      }
+      ZZ given();
+      ZZ_p createe();
+      ZZ_p RSA_encrypt(ZZ_p m);
+      long RSA_decrypt(ZZ_p res);
+      ZZ_p dig_sign(ZZ_p m);
+      bool dig_sign_verify(ZZ_p sign,ZZ_p m);
+};
 
-
-
-
-
+class AttackAlgo{
+  private:
+      ZZ p;
+      ZZ constant;
+      ZZ_p g;
+      ZZ_p h;
+  public:
+      AttackAlgo(ZZ p,ZZ_p g,ZZ_p h){
+          this -> p = p;
+          ZZ_p::init(this ->p);
+          this -> g = g;
+          this -> h = h;
+      }
+      ZZ_p func(ZZ_p x);
+      ZZ pollard_rho_factorization();
+      ZZ pollard_rho_minus_factorization();
+      tuple<ZZ_p,ZZ_p,ZZ_p> dlp_func(ZZ_p r,ZZ_p a,ZZ_p b);
+      ZZ_p pollard_rho_dlp();
+};

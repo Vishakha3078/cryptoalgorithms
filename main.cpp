@@ -2,41 +2,93 @@
 #include"crypto.h"
 
 int main(){
-    ZZ p;
+
+//pollard_rho_factorization-----------------------------------------------------------------------
+ // /*   
+    ZZ p = ZZ(97);
+    p =conv<ZZ>(p);
+    ZZ_p ::init(p);
+    AttackAlgo *a = new AttackAlgo(p,to_ZZ_p(5),to_ZZ_p(18));
+    ZZ_p x;
+    x = a -> pollard_rho_dlp();
+    cout <<"x : "<< x <<endl;
+    
+  //*/    
 //elliptic_curve_points---------------------------------------------------------------------------
-///*
+/*
     p = 11;
     p =conv<ZZ>(p);
     ZZ_p ::init(p);
     ZZ_p a,b;
     a = 1;
     b = 6;
-    elliptic_curve *c = new elliptic_curve(p,a,b);
-    point *pnt;
-    int number,m;
-    number = 12;
-    pnt = c->ell_curve_point(number);
-   // for(int i = 0; i < n; i++)
-   //     cout <<"x: "<< pnt[i].x <<" y: "<< pnt[i].y <<endl;
     point pt1,pt2;
     pt1.x = 2;
     pt1.y = 7;
+    pt2.x = 7;
+    pt2.y = 2;
+    elliptic_curve *c = new elliptic_curve(p,a,b);
+    int number,m;
+    number = 18;
+    point *pnt = c->ell_curve_point(number);
+    for(int i = 0; i < number; i++)
+       cout <<"x: "<< pnt[i].x <<" y: "<< pnt[i].y <<endl;
+  */
 //scalar multiplication------------------------------------------------------------------------
-   // point resultant = c-> scalar_multiplication(pt1,ZZ(4));
-    //cout <<"x: "<< resultant.x <<" y: "<< resultant.y <<endl;
+   // point resultant = c-> scalar_multiplication(pt1,ZZ(12));
+     // cout <<"x: "<< resultant.x <<" y: "<< resultant.y <<endl;
+    //point resultant = c-> point_addition(pt1,pt2);
+     // cout <<"x: "<< resultant.x <<" y: "<< resultant.y <<endl;
 //el gamal----------------------------------------------------------------------------------------
-    point msg;
+/*   point msg;
     msg.x = 3;
     msg.y = 6;
     two_pnt res = c -> el_gamal_encrypt(pt1,msg);
     //encryption
-    cout <<"C1 -> x: "<< res.a.x <<" C1-> y: "<< res.a.y <<endl;
+    cout <<"C1 -      > x: "<< res.a.x <<" C1-> y: "<< res.a.y <<endl;
     cout <<"C2 -> x: "<< res.b.x <<" C2 -> y: "<< res.b.y <<endl;
     //decryption
-    
     msg = c -> el_gamal_decrypt(res.a,res.b);
      cout <<"x: "<< msg.x <<" y: "<< msg.y <<endl;
-//*/
+*/
+//integrated scheme------------------------------------------------------------------------------
+  //encryption
+   /*
+     ZZ msg = ZZ(12);
+    enc_txt res = c -> integrated_encrypt(pt1,msg);
+    cout <<"C1 -> x: "<< res.c1.x <<" C1-> y: "<< res.c1.y <<endl;
+    cout <<"C2 : "<< res.c2 <<endl;
+   //decryption
+    ZZ_p result = c -> integrated_decrypt(res);
+    cout << "res : "<<result<<endl;
+  */
+//digital signature------------------------------------------------------------------------------
+ /*     
+  // sign creation
+    ZZ order = ZZ(13);
+    ZZ_p m = to_ZZ_p(4);
+    signature res = c -> digital_sign(pt1,order,m);
+    cout <<"gamma: "<< res.gamma <<" delta: "<< res.delta <<endl;
+    //verification
+    cout << c -> digital_sign_verification(res,m,pt1)<<endl;
+*/
+//RSA---------------------------------------------------------------------------------------------
+ /*
+  //encryption
+    ZZ p = ZZ(41);
+    ZZ q = ZZ(19);
+    RSA *c = new RSA(p,q);
+    ZZ n = c -> given();
+    ZZ_p ::init(n);
+        cout <<"n -> "<<n<<endl;
+    string message ;
+    getline(cin,message);
+    cout<< "enter message len: "<<message.length()<<endl;
+    for(int i = 0; i < message.length(); i++){
+        ZZ_p res = c -> RSA_encrypt(to_ZZ_p(int(message[i])));
+        printf("%c\n", (char)c -> RSA_decrypt(res));
+    }
+*/
 //bruteforce_dlp----------------------------------------------------------------------------------
 /*
     cout << "Enter prime : " <<endl;
@@ -75,7 +127,7 @@ int main(){
   */
   
 //el_gamal----------------------------------------------------------------------------------------
- /*
+ /*   
     cout << "Enter prime : " <<endl;
 	  cin >> p;
     p = conv<ZZ>(p);

@@ -1,40 +1,22 @@
 all: run
 
-finish:main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o build_h.o build_Q.o elliptic_curve.o
-	g++ main.o brutef_dlp.o diff_hellencryption.o diff_helldecryption.o elgamal_encryption.o elgamal_decryption.o dig_sign.o dig_signverification.o build_h.o build_Q.o elliptic_curve.o -lntl -lgmp -pthread -o finish
+finish:main.o general_algo.o elliptic_curve.o rsa.o attacking_algo.o
+	g++ main.o general_algo.o elliptic_curve.o rsa.o attacking_algo.o -lntl -lgmp -pthread -o finish
 
 main.o: main.cpp
 	g++ -c main.cpp -o main.o
 
-brutef_dlp.o: brutef_dlp.cpp
-	g++ -c brutef_dlp.cpp -o brutef_dlp.o
-
-diff_hellencryption.o: diff_hellencryption.cpp
-	g++ -c diff_hellencryption.cpp -o diff_hellencryption.o
-
-diff_helldecryption.o: diff_helldecryption.cpp
-	g++ -c diff_helldecryption.cpp -o diff_helldecryption.o
-
-elgamal_encryption.o: elgamal_encryption.cpp
-	g++ -c elgamal_encryption.cpp -o elgamal_encryption.o
-
-elgamal_decryption.o: elgamal_decryption.cpp
-	g++ -c elgamal_decryption.cpp -o elgamal_decryption.o
-  
-dig_sign.o: dig_sign.cpp
-	g++ -c dig_sign.cpp -o dig_sign.o
-
-dig_signverification.o: dig_signverification.cpp
-	g++ -c dig_signverification.cpp -o dig_signverification.o
-
-build_h.o: build_h.cpp
-	g++ -c build_h.cpp -o build_h.o
-
-build_Q.o: build_Q.cpp
-	g++ -c build_Q.cpp -o build_Q.o
+general_algo.o: general_algo.cpp
+	g++ -c general_algo.cpp -o general_algo.o
 
 elliptic_curve.o: elliptic_curve.cpp
 	g++ -c elliptic_curve.cpp -o elliptic_curve.o
+
+rsa.o: rsa.cpp
+	g++ -c rsa.cpp -o rsa.o
+
+attacking_algo.o: attacking_algo.cpp
+	g++ -c attacking_algo.cpp -o attacking_algo.o
 
 header: crypto.h
 	g++ crypto.h
