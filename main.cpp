@@ -7,8 +7,10 @@ int main(){
  // /*   
     ZZ p = ZZ(97);
     p =conv<ZZ>(p);
+    ZZ f = power(ZZ(5),34);
     ZZ_p ::init(p);
     AttackAlgo *a = new AttackAlgo(p,to_ZZ_p(5),to_ZZ_p(18));
+  cout << "gcd " <<GCD(77,96)<<endl;
     ZZ_p x;
     x = a -> pollard_rho_dlp();
     cout <<"x : "<< x <<endl;
